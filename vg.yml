@@ -1,0 +1,16 @@
+---
+- name: create a playbook for creating vg
+  hosts: all
+  tasks:
+    - name: Create a volume group on top of /dev/sdb
+      lvg:
+        vg: research
+        pvs: /dev/sdb
+      when:  
+        - ansible_devices.sdb is defined
+    - name: Create a volume group on top of /dev/sdb
+      lvg:
+        vg: research
+        pvs: /dev/sdb
+      when:
+        - ansible_devices.sdb is defined

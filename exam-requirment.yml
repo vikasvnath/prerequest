@@ -20,11 +20,11 @@
         state: enabled
     - name: Download file from a file path
       get_url:
-        url: https://github.com/vikasvnath/Ansible_Exam/raw/master/ '{{ item }}'
+        url: "https://github.com/vikasvnath/prerequest/raw/master/{{ item }}"
         dest: /var/www/html/
         owner: root
         group: root
-      loop:
+      with_items:
         - haproxy.tar
         - phpinfo.tar
         - salaries.yml
