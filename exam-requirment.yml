@@ -1,0 +1,32 @@
+---
+- name: Install httpd and adding to firewall
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: install the latest version of Apache
+      yum:
+        name: httpd
+        state: latest
+    - name: Enable service httpd, and not touch the state
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+    - name: adding Http to firewall
+      firewalld:
+        service: http
+        permanent: yes
+        immediate: yes
+        state: enabled
+    - name: Download file from a file path
+      get_url:
+        url: https://github.com/vikasvnath/Ansible_Exam/raw/master/ '{{ item }}'
+        dest: /var/www/html/
+        owner: root
+        group: root
+      loop:
+        - haproxy.tar
+        - phpinfo.tar
+        - salaries.yml
+        - hwreport.empty
+        
